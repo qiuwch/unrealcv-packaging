@@ -6,7 +6,7 @@ project_name=$(basename ${project} .uproject)
 
 export UE4=./UnrealEngine/
 build_suffix=$(python ../common/build-conf.py --format "{unrealcv_version}")
-build_name=${project_name}-${build_suffix}
+build_name=${project_name}-${platform}-${build_suffix}
 
 output_folder=${PWD}/${build_name}
 
