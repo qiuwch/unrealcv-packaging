@@ -1,2 +1,5 @@
-UnrealEngine*/
+built/
 unrealcv/
+*-*/
+*-*.zip
+UnrealEngine/

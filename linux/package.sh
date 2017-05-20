@@ -17,13 +17,14 @@ fi
 
 cmd="/UE4/Engine/Build/BatchFiles/RunUAT.sh BuildCookRun \
     -project=/project/${project_name}.uproject -archivedirectory=/output \
-    -noP4 -platform=Linux -clientconfig=Development -serverconfig=Development -allmaps -stage -pak -archive -cook"
+    -noP4 -platform=Linux -clientconfig=Development -serverconfig=Development -allmaps -stage -pak -archive -cook -build" 
 echo ${cmd}
 
-if [ -d ${project_folder}/Source ]; then
-    echo Build c++ code also
-    cmd=${cmd} "-build"
-fi
+# build is also required for Linux
+# if [ -d ${project_folder}/Source ]; then
+#     echo Build c++ code also
+#     cmd=${cmd} "-build"
+# fi
 # docker run -it --rm -v ${PWD}/UnrealEngine:/UE4 qiuwch/ue4-base bash -c "sudo chown -R unrealcv /UE4; cd UE4; sudo apt-get update; ./Setup.sh; ./GenerateProjectFiles.sh; make -C /UE4"
 docker run -it --rm -v ${PWD}/UnrealEngine:/UE4 \
     -v ${project_folder}:/project \
