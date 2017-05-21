@@ -1,4 +1,4 @@
-import os, json, argparse
+import os, json, argparse, platform
 def parse_unrealcv_version(unrealcv_folder='./unrealcv'):
     plugin_descriptor = os.path.join(unrealcv_folder, 'UnrealCV.uplugin')
     with open(plugin_descriptor) as f:
@@ -13,12 +13,16 @@ def parse_ue4_version(ue4_folder=os.environ['UE4']):
     ue4_version = '%s.%s' % (v['MajorVersion'], v['MinorVersion']) # PathVersion is not neccessary
     return ue4_version
 
+def parse_platform():
+    return platform.system() 
+
 if __name__ == '__main__':
     unrealcv_version = parse_unrealcv_version() 
     ue4_version = parse_ue4_version()
     info = dict(
         unrealcv_version = unrealcv_version,
         ue4_version = ue4_version,
+        platform = parse_platform(),
     )
     info_keys = ','.join(info.keys())
 
