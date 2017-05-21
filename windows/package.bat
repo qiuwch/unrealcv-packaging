@@ -14,7 +14,7 @@ if not exist %project% (
 	goto:eof
 )
 
-set cmd="%UE4%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project=%project% -archivedirectory=%output_folder% -noP4 -platform=Win64 -clientconfig=Development -serverconfig=Development -allmaps -stage -pak -archive -cook
+set cmd="%UE4%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project=%project% -archivedirectory=%output_folder% -noP4 -platform=Win64 -clientconfig=Development -serverconfig=Development -allmaps -stage -pak -archive -cook -build
 if exist %project_folder%\Source (
 	rem Build source code 
     set cmd=%cmd% -build

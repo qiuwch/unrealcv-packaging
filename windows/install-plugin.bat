@@ -13,4 +13,4 @@ if not exist %plugin_binary% (
     call build-plugin.bat
 )
 
-xcopy /e %plugin_binary% %project_folder%\Plugins
+xcopy /e /y %plugin_binary% %project_folder%\Plugins\
