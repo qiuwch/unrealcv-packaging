@@ -15,9 +15,10 @@ if [ ! -f ${project} ]; then
     echo File not exist; exit
 fi
 
+config=Development
 cmd="/UE4/Engine/Build/BatchFiles/RunUAT.sh BuildCookRun \
     -project=/project/${project_name}.uproject -archivedirectory=/output \
-    -noP4 -platform=Linux -clientconfig=Development -serverconfig=Development -allmaps -stage -pak -archive -cook -build" 
+    -noP4 -platform=Linux -clientconfig=${config} -serverconfig=${config} -allmaps -stage -pak -archive -cook -build" 
 echo ${cmd}
 
 # build is also required for Linux
@@ -31,4 +32,8 @@ docker run -it --rm -v ${PWD}/UnrealEngine:/UE4 \
     -v ${output_folder}:/output \
     qiuwch/ue4-base bash -c "sudo chown -R unrealcv /output /project; ${cmd}"
 
-sh release.sh ${build_name}
+if [ $? -eq 0 ]; then
+    sh release.sh ${build_name}
+else
+    echo "Fail to package the binary"
+fi
