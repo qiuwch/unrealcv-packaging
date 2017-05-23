@@ -4,7 +4,7 @@ rem Available options in here http://stackoverflow.com/questions/659647/how-to-g
 set project_folder=%~dp1%
 set project_name=%~n1%
 
-python ..\common\build-conf.py --format {platform}_{unrealcv_version} > build-conf.txt
+python ..\common\build-conf.py --format {platform}-{unrealcv_version} > build-conf.txt
 set /p build_suffix=<build-conf.txt
 set build_name=%project_name%-%build_suffix%
 set output_folder=%CD%\%build_name%
