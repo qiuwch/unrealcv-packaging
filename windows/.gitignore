@@ -2,3 +2,4 @@ built/
 unrealcv/
 *-*/
 *-*.zip
+build-conf.txt
