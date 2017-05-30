@@ -24,6 +24,19 @@ Run `../model-zoo-test/run-test.sh` to verify the correctness of binaries.
 
 ## Run test for checking binaries
 
+Run `setup.sh` in `model-zoo-test` to download the binary.
+
+I can use a base docker image to run the binary, which is easier to control.
+
+Make sure I have a copy of unrealcv code I can use.
+
+A few things to check.
+
+0. Whether it crashes? Whether it can connect successfully?
+-. Whether the object mask is clearly generated.
+-. Whether the object mask aligns well with the image.
+-. Whether all materials are correctly displayed?
+
 
 ## Docker packaging
 
