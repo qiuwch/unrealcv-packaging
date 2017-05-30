@@ -15,4 +15,5 @@ if [ -z ${project_folder} ]; then
 fi 
 
 echo Project folder is ${project_folder}
+rm -rf ${project_folder}/Plugins/UnrealCV
 cp -r ${plugin_binary} ${project_folder}
