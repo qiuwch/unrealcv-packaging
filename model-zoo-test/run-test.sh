@@ -12,6 +12,7 @@ pid=$!
 
 # Run some test
 echo Run some test
-sleep 30
+sleep 2 
+pytest unrealcv/test/connection_test.py
 
 kill ${pid}
