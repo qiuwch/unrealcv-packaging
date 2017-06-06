@@ -30,7 +30,8 @@ echo ${cmd}
 docker run -it --rm -v ${PWD}/UnrealEngine:/UE4 \
     -v ${project_folder}:/project \
     -v ${output_folder}:/output \
-    qiuwch/ue4-base bash -c "sudo chown -R unrealcv /output /project; ${cmd}"
+    qiuwch/ue4-base bash -c "sudo chown -R unrealcv /output /project; ${cmd}" \
+    > ${build_name}.log
 
 if [ $? -eq 0 ]; then
     sh release.sh ${build_name}

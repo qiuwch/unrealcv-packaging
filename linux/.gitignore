@@ -2,4 +2,5 @@ built/
 unrealcv/
 *-*/
 *-*.zip
+*.log
 UnrealEngine/
