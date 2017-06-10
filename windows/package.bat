@@ -1,8 +1,8 @@
 call config.bat
-set project=%~f1%
+set project=%~f1
 rem Available options in here http://stackoverflow.com/questions/659647/how-to-get-folder-path-from-file-path-with-cmd
-set project_folder=%~dp1%
-set project_name=%~n1%
+set project_folder=%~dp1
+set project_name=%~n1
 
 python ..\common\build-conf.py --format {platform}_{unrealcv_version} > build-conf.txt
 set /p build_suffix=<build-conf.txt
