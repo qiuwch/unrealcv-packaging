@@ -1,3 +1,4 @@
+git clone -b develop https://github.com/unrealcv/unrealcv.git
 docker run -it --rm \
     -v ${PWD}/unrealcv:/unrealcv \
     -v ${PWD}/UnrealEngine:/UE4 \
