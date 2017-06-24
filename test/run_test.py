@@ -66,7 +66,8 @@ class LinuxBinary(Binary):
             sys.exit(-1)
 
         cmd = self.linux_binary
-        self.pid = subprocess.Popen(cmd).pid
+        null_file = open(os.devnull, 'w')
+        self.pid = subprocess.Popen(cmd, stdout = null_file, stderr = null_file).pid
         time.sleep(6)
 
     def close(self):
@@ -98,19 +99,19 @@ if __name__ == '__main__':
     #     'UrbanCity-Windows-0.3.6.zip',
     # ]
     urls = [
-        'RealisticRendering-Linux-0.3.9.zip',
-        # 'ArchinteriorsVol2Scene1-Linux-0.3.8.zip',
-        # 'ArchinteriorsVol2Scene2-Linux-0.3.8.zip',
-        # 'ArchinteriorsVol2Scene3-Linux-0.3.8.zip',
-        # 'UrbanCity-Linux-0.3.6.zip',
+        # 'RealisticRendering-Linux-0.3.9.zip',
+        'ArchinteriorsVol2Scene1-Linux-0.3.8.zip',
+        'ArchinteriorsVol2Scene2-Linux-0.3.8.zip',
+        'ArchinteriorsVol2Scene3-Linux-0.3.8.zip',
+        'UrbanCity-Linux-0.3.6.zip',
     ]
     urls = [root_url + v for v in urls]
 
     test_scripts = [
         'connection_test.py',
-        # 'camera_test.py',
-        # 'stereo_test.py',
-        # 'object_test.py',
+        'camera_test.py',
+        'stereo_test.py',
+        'object_test.py',
     ]
     test_scripts = ['unrealcv/test/' + v for v in test_scripts]
     for script in test_scripts:
