@@ -1,4 +1,4 @@
-import os, zipfile, subprocess, time
+import os, zipfile, subprocess, time, sys
 import pytest
 
 # Run test in windows
@@ -59,17 +59,30 @@ class WinBinary(Binary):
 
 class LinuxBinary(Binary):
     def start(self):
-        pass
+        self.linux_binary = os.path.join(self.unzip_folder, self.project_name, self.project_name,
+            'Binaries', 'Linux', self.project_name)
+        if not os.path.isfile(self.linux_binary):
+            print('Linux binary %s can not be found' % self.linux_binary)
+            sys.exit(-1)
+
+        cmd = self.linux_binary
+        self.pid = subprocess.Popen(cmd).pid
+        time.sleep(6)
 
     def close(self):
-        pass
+        # Kill Linux process
+        cmd = ['kill', str(self.pid)]
+        print('Kill process %s with command %s' % (self.pid, cmd))
+
+        subprocess.call(cmd)
 
 
 def test_url(url, test_scripts):
     # parser = UrlParser(url)
     # print(parser.basename)
     # print('Basename: ', basename)
-    binary = WinBinary(url)
+    # binary = WinBinary(url)
+    binary = LinuxBinary(url)
 
     with binary:
         print('Run test script')
@@ -77,20 +90,27 @@ def test_url(url, test_scripts):
 
 if __name__ == '__main__':
     root_url = 'http://cs.jhu.edu/~qiuwch/release/unrealcv/'
+    # urls = [
+    #     'RealisticRendering-Windows-0.3.9.zip',
+    #     'ArchinteriorsVol2Scene1-Windows-0.3.6.zip',
+    #     'ArchinteriorsVol2Scene2-Windows-0.3.6.zip',
+    #     'ArchinteriorsVol2Scene3-Windows-0.3.6.zip',
+    #     'UrbanCity-Windows-0.3.6.zip',
+    # ]
     urls = [
-        'RealisticRendering-Windows-0.3.9.zip',
-        'ArchinteriorsVol2Scene1-Windows-0.3.6.zip',
-        'ArchinteriorsVol2Scene2-Windows-0.3.6.zip',
-        'ArchinteriorsVol2Scene3-Windows-0.3.6.zip',
-        'UrbanCity-Windows-0.3.6.zip',
+        'RealisticRendering-Linux-0.3.9.zip',
+        # 'ArchinteriorsVol2Scene1-Linux-0.3.8.zip',
+        # 'ArchinteriorsVol2Scene2-Linux-0.3.8.zip',
+        # 'ArchinteriorsVol2Scene3-Linux-0.3.8.zip',
+        # 'UrbanCity-Linux-0.3.6.zip',
     ]
     urls = [root_url + v for v in urls]
 
     test_scripts = [
         'connection_test.py',
-        'camera_test.py',
-        'stereo_test.py',
-        'object_test.py',
+        # 'camera_test.py',
+        # 'stereo_test.py',
+        # 'object_test.py',
     ]
     test_scripts = ['unrealcv/test/' + v for v in test_scripts]
     for script in test_scripts:
