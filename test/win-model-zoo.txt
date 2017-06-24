@@ -1,0 +1,5 @@
+http://www.cs.jhu.edu/~qiuwch/release/unrealcv/RealisticRendering-Windows-0.3.9.zip
+http://cs.jhu.edu/~qiuwch/release/unrealcv/ArchinteriorsVol2Scene1-Windows-0.3.6.zip
+http://cs.jhu.edu/~qiuwch/release/unrealcv/ArchinteriorsVol2Scene2-Windows-0.3.6.zip
+http://cs.jhu.edu/~qiuwch/release/unrealcv/ArchinteriorsVol2Scene3-Windows-0.3.6.zip
+http://cs.jhu.edu/~qiuwch/release/unrealcv/UrbanCity-Windows-0.3.6.zip
