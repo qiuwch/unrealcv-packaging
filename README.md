@@ -56,7 +56,7 @@ Packaging scripts for UnrealCV
 
   `sh linux/docker/build-ue4.sh`
 
-2. Clone and build UnrealCV
+2. Build UnrealCV
 
   `sh linux/docker/build-unrealcv.sh`
 
@@ -74,7 +74,7 @@ Package docker image. Run this to build the newest image and also push the image
 
 ## Mac
 
-1. Clone and build UnrealCV
+1. Build UnrealCV
 
   `sh mac/build-unrealcv.sh`
 
