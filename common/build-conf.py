@@ -17,7 +17,11 @@ def parse_ue4_version(ue4_folder=os.environ['UE4']):
     return ue4_version
 
 def parse_platform():
-    return platform.system()
+    p = platform.system()
+    if p == 'Darwin':
+        return 'Mac'
+
+    return platform
 
 if __name__ == '__main__':
     unrealcv_version = parse_unrealcv_version()
