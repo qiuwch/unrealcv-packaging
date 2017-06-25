@@ -1,11 +1,12 @@
 # unrealcv-packaging
-Packing scripts for unrealcv
 
-Run the test of unrealcv first before packaging!
+Packaging scripts for UnrealCV
 
-Required scripts
+## Scripts
+
 1. build-unrealcv - Build UnrealCV plugin binary
 2. package - Install plugin and create a game binary
+
 
 - linux/                # Packaging scripts for linux
 
@@ -37,13 +38,59 @@ Required scripts
 
 - docs/                 # Documentation for this repository
 
+
+## Prepare
+
+1. Download and put uproject into `uproject` folder. Packaged binaries will be saved to the `uproject` folder.
+
+2. Clone UnrealCV
+
+`git clone https://github.com/unrealcv/unrealcv.git`
+
+
 ## Linux
 
-The important part is testing the binary and make sure it work properly. This is done by the scripts in the `model-zoo-test` folder, which is platform independent.
+1. Compile UnrealEngine from source code
 
-Run `../model-zoo-test/run-test.sh` to verify the correctness of binaries.
+  `git clone -b 4.14 https://github.com/EpicGames/UnrealEngine.git`
+
+  `sh linux/docker/build-ue4.sh`
+
+2. Clone and build UnrealCV
+
+  `sh linux/docker/build-unrealcv.sh`
+
+3. Package uproject (make sure update the UnrealCV version)
+
+  `sh linux/docker/package.sh repos/[ProjectFolder]/[ProjectName].uproject`
+
+### Packaging Docker Image
+
+Docker image of RealisticRendering is provided, but `nvidia-docker` is only supported in Linux.
+
+Package docker image. Run this to build the newest image and also push the image to Dockerhub.
+
+`sh linux/docker/build-rr-image.sh`
+
+## Mac
+
+1. Clone and build UnrealCV
+
+  `sh mac/build-unrealcv.sh`
+
+2. Package uproject
+
+  `sh mac/package.sh repos/[ProjectFolder]/[ProjectName].uproject`
 
 ## Windows
+
+1. Build UnrealCV
+
+  `sh windows/build-unrealcv.sh`
+
+2. Package uproject
+
+  `sh mac/package.sh repos/[ProjectFolder]/[ProjectName].uproject`
 
 
 ## Run test for checking binaries
@@ -60,8 +107,3 @@ A few things to check.
 -. Whether the object mask is clearly generated.
 -. Whether the object mask aligns well with the image.
 -. Whether all materials are correctly displayed?
-
-
-## Docker packaging
-
-Run `build.sh` to build the newest image and also push the image to dockerhub.
