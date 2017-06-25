@@ -3,15 +3,39 @@ Packing scripts for unrealcv
 
 Run the test of unrealcv first before packaging!
 
+Required scripts
+1. build-unrealcv - Build UnrealCV plugin binary
+2. package - Install plugin and create a game binary
 
-```
-linux/           # Packaging scripts for linux
-windows/         # Packaging scripts for windows
-repos/           # Clone Unreal projects to local disk
-model-zoo-test/  # Script to download a binary for testing.
-docs/            # Documentation for this repository
-rr-docker/       # Script to package the rr-docker image
-```
+- linux/                # Packaging scripts for linux
+
+    - docker/
+
+        - build-ue4.sh      # Linux requires the compilation of UE4 from code
+        - build-rr-image.sh
+        - build-unrealcv.sh
+        - package.sh
+        - run-editor.sh
+
+- windows/              # Packaging scripts for windows
+
+    - build-unrealcv.bat
+    - package.bat
+
+- mac/                  # Packaging scripts for mac, might be redundant as the linux version
+
+    - build-unrealcv.sh
+    - package.sh
+
+- common/               # Functions shared
+
+    - build-conf.py       # Get the plugin configuration information
+
+- repos/                # Clone Unreal projects to local disk
+
+- test/                 # Script to download a binary for testing.
+
+- docs/                 # Documentation for this repository
 
 ## Linux
 
