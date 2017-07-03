@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "required": ["Runs"],
+  "properties":
+  {
+    "Runs":
+    {
+      "type": "array",
+      "items":
+      {
+        "type": "object",
+        "title": "Run",
+        "required": ["OS", "UE4", "UnrealCV", "Project", "Name"],
+        "properties" :
+        {
+          "Name":
+          {
+            "type": "string"
+          },
+          "UE4":
+          {
+            "type": "object",
+            "title": "UE4",
+            "required": ["Path", "Version"],
+            "properties": {
+              "Path": { "type": "string"},
+              "Version": {"type": "string"}
+            }
+          },
+          "UnrealCV":
+          {
+            "type": "object",
+            "title": "UnrealCV",
+            "required": ["Path", "Version"],
+            "properties": {
+              "Path": { "type": "string"},
+              "Version": {"type": "string"}
+            }
+          },
+          "Project":
+          {
+            "type": "object",
+            "title": "Project",
+            "required": ["Path", "Output"],
+            "properties": {
+              "Path": { "type": "string"},
+              "Version": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}
