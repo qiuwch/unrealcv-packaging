@@ -1,6 +1,12 @@
 *.swp
 *.png
+
+*.log
+*.report
+*.txt
+
 *~
 
 .cache/
 unrealcv/
+UE414/
