@@ -1,5 +1,5 @@
 import os, json, argparse, platform
-def parse_unrealcv_version(unrealcv_folder='./unrealcv'):
+def parse_unrealcv_version(unrealcv_folder=os.environ['UnrealCV']):
     plugin_descriptor = os.path.join(unrealcv_folder, 'UnrealCV.uplugin')
     with open(plugin_descriptor) as f:
         description = json.load(f)
@@ -20,8 +20,8 @@ def parse_platform():
     p = platform.system()
     if p == 'Darwin':
         return 'Mac'
-
-    return platform
+    else:
+        return p
 
 if __name__ == '__main__':
     unrealcv_version = parse_unrealcv_version()
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     format_help = '''The information to be included in the string, available options are %s
     An example is "{ue4_version}-{unrealcv_version}''' % info_keys
-    parser.add_argument('--format', required=True, help = format_help)
+    parser.add_argument('--format', help = format_help, default = '{unrealcv_version}-{ue4_version}-{platform}')
     args = parser.parse_args()
 
     print(args.format.format(**info))
