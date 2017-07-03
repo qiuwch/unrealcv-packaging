@@ -1,4 +1,4 @@
-import argparse, json, os, sys, logging, subprocess, time
+import argparse, json, os, sys, logging, subprocess, time, signal
 
 logger = logging.getLogger(__name__)
 # logger.setLevel(logging.INFO)
@@ -16,23 +16,6 @@ class Timer:
 
     def GetElapsed(self):
         return self.elapse
-
-class Tee(object):
-    ''' Output to both stdout and a file
-    from: https://stackoverflow.com/questions/616645/how-do-i-duplicate-sys-stdout-to-a-log-file-in-python
-    '''
-    def __init__(self, name, mode):
-        self.file = open(name, mode)
-        self.stdout = sys.stdout
-        # sys.stdout = self
-        self.fileno = sys.stdout.fileno
-
-    def __del__(self):
-        self.file.close()
-
-    def write(self, data):
-        self.file.write(data)
-        self.stdout.write(data)
 
 class TaskRunner:
     def __init__(self, opt):
@@ -88,31 +71,51 @@ class TaskRunner:
 
         for script in self.opt['Scripts']:
             # Pick 'task' instead of 'run', because 'run' can also be a verb.
+            logger.info('Script to run %s' % script)
             script_path = script['Path']
             # Format the script in a cross-platform way
 
             cwd = script.get('CWD') # optional
 
             log_filename = script.get('Log')
-            log_file = open(log_filename, 'w')
+            if log_filename and os.path.isfile(log_filename):
+                logger.info('Log file %s exists, skip this script' % log_filename)
+                continue
 
-            logger.info('Script to run %s' % script)
+            if log_filename:
+                log_file = open(log_filename, 'w')
+            else:
+                log_file = None
+
             # subprocess.call(script, env=os.environ) # Run with an updated system environment
             timer = Timer()
             report.write('Run script %s \n' % script)
             with timer:
+                global popen_obj
                 popen_obj = subprocess.Popen(script_path, cwd = cwd, stdout = subprocess.PIPE)
                 # popen_obj = subprocess.Popen(script, cwd = cwd)
 
             # [stdoutdata, stderrdata] = popen_obj.communicate()
             while popen_obj.poll() is None:
                 l = popen_obj.stdout.readline()
-                if log_file: log_file.write(l)
+                # import ipdb; ipdb.set_trace()
+                if log_file:
+                    line = l.replace(r"\r\n", r"\n") # Make it consistent
+                    log_file.write(line)
+                    # log_file.write('A line break\n')
                 logger.info(l.strip())
 
             report.write('Time: %.2f sec \n' % timer.GetElapsed())
             report.write('Exit code: %d \n' % popen_obj.returncode)
 
+popen_obj = None
+
+def signal_handler(signal, frame):
+    print('You pressed Ctrl+C!')
+    if popen_obj:
+        popen_obj.kill()
+    sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
 
 def main():
     parser = argparse.ArgumentParser()
