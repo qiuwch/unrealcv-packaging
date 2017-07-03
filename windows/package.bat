@@ -1,13 +1,14 @@
-call config.bat
 set project=%~f1
+set output_folder=%~f2
 rem Available options in here http://stackoverflow.com/questions/659647/how-to-get-folder-path-from-file-path-with-cmd
 set project_folder=%~dp1
 set project_name=%~n1
 
-python ..\common\build-conf.py --format {platform}-{unrealcv_version} > build-conf.txt
+REM for /f "delims=" %%i in ('command') do set output=%%i
+python %~dp0\..\common\build-conf.py --format {platform}-{unrealcv_version} > build-conf.txt
 set /p build_suffix=<build-conf.txt
 set build_name=%project_name%-%build_suffix%
-set output_folder=%CD%\%build_name%
+set output_folder=%output_folder%\%build_name%
 
 if not exist %project% (
 	rem File not exist
