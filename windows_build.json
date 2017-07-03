@@ -18,13 +18,31 @@
       "Scripts":
       [
         {
+          "Path":
+          [
+            "python", "{PWD}/common/build-conf.py"
+          ]
+        },
+        {
           "Path": [
             "{PWD}/windows/install-plugin.bat", "uproject/UE4RealisticRendering/RealisticRendering.uproject",
             "{UnrealCV}/Plugins"
           ]
         },
         {
-          "Path": ["{PWD}/windows/package.bat", "uproject/UE4RealisticRendering/RealisticRendering.uproject"]
+          "Path": [
+            "{PWD}/windows/package.bat", "uproject/UE4RealisticRendering/RealisticRendering.uproject",
+            "{PWD}/UE414"
+          ],
+          "Log": "{TaskName}-RR-Package.log"
+        },
+        {
+          "Path": [
+            "python",
+            "{PWD}/test/run_test.py",
+            "--binary", "UE414/RealisticRendering-Windows-0.3.9/WindowsNoEditor/RealisticRendering.exe"
+          ],
+          "Log": "{TaskName}-RR-Test.log"
         }
       ]
     }

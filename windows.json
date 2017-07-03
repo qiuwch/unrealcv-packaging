@@ -26,7 +26,9 @@
           "Path": ["{PWD}/windows/install-plugin.bat", "uproject/UE4RealisticRendering/RealisticRendering.uproject"]
         },
         {
-          "Path": ["{PWD}/windows/package.bat", "uproject/UE4RealisticRendering/RealisticRendering.uproject"]
+          "Path": ["{PWD}/windows/package.bat", "uproject/UE4RealisticRendering/RealisticRendering.uproject",
+          "{PWD}/UE414"
+          ]
         }
       ]
     }
