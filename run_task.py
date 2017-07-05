@@ -70,8 +70,12 @@ class TaskRunner:
         report = open(report_filename, 'w')
 
         for script in self.opt['Scripts']:
-            # Pick 'task' instead of 'run', because 'run' can also be a verb.
             logger.info('Script to run %s' % script)
+
+            if script.get('Skip') and script['Skip'] == True:
+                logger.info('This script is set to be skipped')
+                continue
+            # Pick 'task' instead of 'run', because 'run' can also be a verb.
             script_path = script['Path']
             # Format the script in a cross-platform way
 
