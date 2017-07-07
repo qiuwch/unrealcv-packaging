@@ -9,7 +9,8 @@ project_folder=$(dirname ${project})
 project_name=$(basename ${project} .uproject)
 
 build_name=${project_name}-${build_suffix}
-output_folder=${PWD}/uproject/${build_name}
+
+output_folder=$(greadlink -f $2)/${build_name}
 
 # File existence tests
 if [ ! -f ${project} ]; then

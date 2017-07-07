@@ -65,6 +65,9 @@ class WindowsBinary(Binary):
         subprocess.call(cmd)
 
 class LinuxBinary(Binary):
+    '''
+    TODO: Can this support mac?
+    '''
     def start(self):
         # self.linux_binary = os.path.join(self.unzip_folder, self.project_name, self.project_name,
             # 'Binaries', 'Linux', self.project_name)
@@ -79,6 +82,18 @@ class LinuxBinary(Binary):
         cmd = ['kill', str(self.pid)]
         print('Kill process %s with command %s' % (self.pid, cmd))
         subprocess.call(cmd)
+
+class DockerBinary(Binary):
+    def start(self):
+        # nvidia-docker run --rm -p 9000:9000 --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" qiuwch/rr:${version} > log/docker-rr.log &
+        pass
+
+    def close(self):
+        pass
+
+# For MAC:
+# open RealisticRendering-Darwin-0.3.8/MacNoEditor/RealisticRendering.app
+# pkill RealisticRendering
 
 def run_test(binary_path, test_scripts):
     # parser = UrlParser(url)
