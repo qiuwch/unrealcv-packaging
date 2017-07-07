@@ -31,9 +31,10 @@ class TaskRunner:
         logger.info('Setup os environment variables')
 
         mapping = dict(
-            UE4 = self.opt['UE4']['Path'],
-            UnrealCV = self.opt['UnrealCV']['Path'],
-            TaskName = self.opt['TaskName']
+            UE4 = self.opt['UE4']['Path'], # Required
+            UnrealCV = self.opt['UnrealCV']['Path'], # Optinal
+            TaskName = self.opt['TaskName'], # Required
+            UProject = self.opt['UProject']['Path'] # Optional
         )
 
         for (k,v) in mapping.iteritems():
@@ -76,6 +77,7 @@ class TaskRunner:
         for script in self.opt['Scripts']:
             # Pick 'task' instead of 'run', because 'run' can also be a verb.
             logger.info('Script to run %s' % script)
+            logger.info('Script to run %s' % ' '.join(script['Path']))
             script_path = script['Path']
             # Format the script in a cross-platform way
 
