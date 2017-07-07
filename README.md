@@ -1,5 +1,7 @@
 # unrealcv-packaging
 
+The task of this repository is defined as json files. See the schema file for the json in `task.schema`, see an example in `playground_UE414.json`. Run `python validate_task.py [Name].json` to see whether the json is in a correct format.
+
 Packaging scripts for UnrealCV
 
 ## Scripts
