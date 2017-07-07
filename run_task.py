@@ -1,8 +1,12 @@
+'''
+TODO: Check UE4 Version
+TODO: Check UnrealCV version
+'''
 import argparse, json, os, sys, logging, subprocess, time, signal
 
 logger = logging.getLogger(__name__)
 # logger.setLevel(logging.INFO)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 logger.addHandler(logging.StreamHandler(sys.stdout))
 
 class Timer:
