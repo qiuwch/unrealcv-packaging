@@ -36,11 +36,12 @@ class Binary(object):
         ''' Start the binary '''
         # Download the binary if not exist
         # self.download()
-        if not os.path.isfile(self.binary_path):
-            print('Linux binary %s can not be found' % self.binary_path)
+        if os.path.isfile(self.binary_path) or os.path.isdir(self.binary_path):
+            self.start()
+        else:
+            print('Binary %s can not be found' % self.binary_path)
             sys.exit(-1)
 
-        self.start()
 
     def __exit__(self, type, value, traceback):
         ''' Close the binary '''
@@ -83,6 +84,19 @@ class LinuxBinary(Binary):
         print('Kill process %s with command %s' % (self.pid, cmd))
         subprocess.call(cmd)
 
+class MacBinary(Binary):
+    def start(self):
+        popen_obj = subprocess.Popen([
+            'open',
+            self.binary_path
+        ])
+        self.program_name = os.path.basename(self.binary_path).replace('.app', '')
+        # TODO: Track the stdout to see whether it is started?
+        time.sleep(5)
+
+    def close(self):
+        subprocess.call(['pkill', self.program_name])
+
 class DockerBinary(Binary):
     def start(self):
         # nvidia-docker run --rm -p 9000:9000 --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" qiuwch/rr:${version} > log/docker-rr.log &
@@ -113,22 +127,6 @@ def run_test(binary_path, test_scripts):
         pytest.main(test_scripts)
 
 if __name__ == '__main__':
-    # root_url = 'http://cs.jhu.edu/~qiuwch/release/unrealcv/'
-    # urls = [
-    #     'RealisticRendering-Windows-0.3.9.zip',
-    #     'ArchinteriorsVol2Scene1-Windows-0.3.6.zip',
-    #     'ArchinteriorsVol2Scene2-Windows-0.3.6.zip',
-    #     'ArchinteriorsVol2Scene3-Windows-0.3.6.zip',
-    #     'UrbanCity-Windows-0.3.6.zip',
-    # ]
-    # urls = [
-        # 'RealisticRendering-Linux-0.3.9.zip',
-    #     'ArchinteriorsVol2Scene1-Linux-0.3.8.zip',
-    #     'ArchinteriorsVol2Scene2-Linux-0.3.8.zip',
-    #     'ArchinteriorsVol2Scene3-Linux-0.3.8.zip',
-    #     'UrbanCity-Linux-0.3.6.zip',
-    # ]
-    # urls = [root_url + v for v in urls]
     parser = argparse.ArgumentParser()
     parser.add_argument('--binary', help='The binary to run', required=True)
 

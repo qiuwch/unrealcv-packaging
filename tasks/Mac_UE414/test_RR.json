@@ -1,14 +1,10 @@
+
 {
   "Tasks": [
     {
       "TaskName": "RR_Mac_UE414",
       "OS": "Mac",
       "Report" : "{TaskName}.report",
-      "UE4":
-      {
-        "Path": "/Users/Shared/Epic Games/UE_4.12",
-        "Version": "4.12"
-      },
       "UnrealCV":
       {
         "Path": "/Users/qiuwch/workspace/unrealcv",
@@ -18,9 +14,11 @@
       [
         {
           "Path": [
-            "{UnrealCV}/build.sh"
-          ],
-          "CWD": "{UnrealCV}"
+            "python",
+            "{PWD}/common/run_test.py",
+            "--binary",
+            "UE414/RealisticRendering-Mac-0.3.9/MacNoEditor/RealisticRendering.app"
+          ]
         }
       ]
     }

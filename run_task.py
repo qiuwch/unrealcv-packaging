@@ -31,11 +31,21 @@ class TaskRunner:
         logger.info('Setup os environment variables')
 
         mapping = dict(
-            UE4 = self.opt['UE4']['Path'], # Required
-            UnrealCV = self.opt['UnrealCV']['Path'], # Optinal
             TaskName = self.opt['TaskName'], # Required
-            UProject = self.opt['UProject']['Path'] # Optional
         )
+
+        # Optional args
+        # Write in this way is more flexible than defining a function
+        if self.opt.get('UE4'):
+            mapping['UE4'] = self.opt['UE4']['Path'] # Required
+
+        if self.opt.get('UnrealCV'):
+            mapping['UnrealCV'] = self.opt['UnrealCV']['Path'] # Optinal
+
+        if self.opt.get('UProject'):
+            mapping['UProject'] = self.opt['UProject']['Path'] # Optional
+
+
 
         for (k,v) in mapping.iteritems():
             os.environ[k] = v
