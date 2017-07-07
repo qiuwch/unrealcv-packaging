@@ -16,8 +16,6 @@ if [ ! -f ${project} ]; then
     echo File not exist; exit
 fi
 
-UE4="/Users/Shared/Epic Games/UE_4.14/"
-
 config=Development
 # config=DebugGame # This is one option.
 "${UE4}"/Engine/Build/BatchFiles/RunUAT.sh BuildCookRun \
