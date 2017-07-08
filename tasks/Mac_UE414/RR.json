@@ -1,0 +1,43 @@
+{
+  "Tasks": [
+    {
+      "TaskName": "RR_Mac_UE414",
+      "OS": "Mac",
+      "Report" : "{TaskName}.report",
+      "UE4":
+      {
+        "Path": "/Users/Shared/Epic Games/UE_4.14",
+        "Version": "4.14"
+      },
+      "UnrealCV":
+      {
+        "Path": "/Users/qiuwch/workspace/unrealcv",
+        "Version": "0.3.9"
+      },
+      "UProject":
+      {
+        "Path": "uproject/UE4RealisticRendering/RealisticRendering.uproject"
+      },
+      "Scripts":
+      [
+        {
+          "Path": [
+            "python",
+            "common/install_unrealcv.py",
+            "--unrealcv", "{UnrealCV}",
+            "--uproject", "{UProject}"
+          ]
+        },
+        {
+          "Path": [
+            "sh",
+            "{PWD}/mac/package.sh",
+            "uproject/UE4RealisticRendering/RealisticRendering.uproject",
+            "{PWD}/UE414"
+          ],
+          "Log": "{TaskName}-RR-Package.log"
+        }
+      ]
+    }
+  ]
+}

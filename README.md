@@ -1,6 +1,17 @@
 # unrealcv-packaging
 
+The task of this repository is defined as json files. See the schema file for the json in `task.schema`, see an example in `playground_UE414.json`. Run `python validate_task.py [Name].json` to see whether the json is in a correct format.
+
+This repository is used to support the testing of multiple versions of UE4 and UnrealCV.
+
 Packaging scripts for UnrealCV
+
+## Examples
+
+`python run_task.py tasks/Linux_UE414/unrealcv.json` to build unrealcv with vanilla UE4.
+
+`python run_task.py tasks/Docker/unrealcv.json`
+
 
 ## Scripts
 

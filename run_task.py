@@ -1,8 +1,12 @@
+'''
+TODO: Check UE4 Version
+TODO: Check UnrealCV version
+'''
 import argparse, json, os, sys, logging, subprocess, time, signal
 
 logger = logging.getLogger(__name__)
 # logger.setLevel(logging.INFO)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 logger.addHandler(logging.StreamHandler(sys.stdout))
 
 class Timer:
@@ -22,15 +26,26 @@ class TaskRunner:
         self.opt = opt
         self.env = dict()
 
-    def setup_environ(self):
+    def _setup_environ(self): # private
         ''' Setup os environment variables based on the config '''
         logger.info('Setup os environment variables')
 
         mapping = dict(
-            UE4 = self.opt['UE4']['Path'],
-            UnrealCV = self.opt['UnrealCV']['Path'],
-            TaskName = self.opt['TaskName']
+            TaskName = self.opt['TaskName'], # Required
         )
+
+        # Optional args
+        # Write in this way is more flexible than defining a function
+        if self.opt.get('UE4'):
+            mapping['UE4'] = self.opt['UE4']['Path'] # Required
+
+        if self.opt.get('UnrealCV'):
+            mapping['UnrealCV'] = self.opt['UnrealCV']['Path'] # Optinal
+
+        if self.opt.get('UProject'):
+            mapping['UProject'] = self.opt['UProject']['Path'] # Optional
+
+
 
         for (k,v) in mapping.iteritems():
             os.environ[k] = v
@@ -62,42 +77,61 @@ class TaskRunner:
         logger.info("Update opt with self.env")
         _update_opt(self.opt)
 
+    def _setup_check(self):
+        # Check whether the configuration is valid
+        # Check UE4, check UE4 version
+
+        # Check UnrealCV, check UnrealCV version
+        unrealcv_plugin = json.load(open(unrealcv_plugin_file))
+        unrealcv_version_name = unrealcv_plugin['VersionName']
+
+        # Check uproject
+        if self.env.get('UProject'):
+            pass
 
     def run(self):
-        self.setup_environ()
+        self._setup_environ()
 
         report_filename = self.opt['Report']
-        report = open(report_filename, 'w')
+        self.report = open(report_filename, 'w')
 
         for script in self.opt['Scripts']:
-            logger.info('Script to run %s' % script)
+            self._run_script(script)
 
-            if script.get('Skip') and script['Skip'] == True:
-                logger.info('This script is set to be skipped')
-                continue
-            # Pick 'task' instead of 'run', because 'run' can also be a verb.
-            script_path = script['Path']
-            # Format the script in a cross-platform way
+        self.report.close()
 
-            cwd = script.get('CWD') # optional
+    def _run_script(self, script):
+        ''' Run a defined script '''
+        # Pick 'task' instead of 'run', because 'run' can also be a verb.
+        logger.info('Script to run %s' % script)
+        logger.info('Script to run %s' % ' '.join(script['Path']))
 
-            log_filename = script.get('Log')
-            if log_filename and os.path.isfile(log_filename):
-                logger.info('Log file %s exists, skip this script' % log_filename)
-                continue
+        # Required fields
+        script_path = script['Path']
+        # Optional fields
+        use_cache = script.get('Cache')
+        cwd = script.get('CWD') # optional
+        log_filename = script.get('Log')
 
-            if log_filename:
-                log_file = open(log_filename, 'w')
-            else:
-                log_file = None
+        if use_cache is None: # Not defined
+            # By default this is true
+            use_cache = True
 
-            # subprocess.call(script, env=os.environ) # Run with an updated system environment
-            timer = Timer()
-            report.write('Run script %s \n' % script)
-            with timer:
-                global popen_obj
-                popen_obj = subprocess.Popen(script_path, cwd = cwd, stdout = subprocess.PIPE)
-                # popen_obj = subprocess.Popen(script, cwd = cwd)
+        if use_cache and log_filename and os.path.isfile(log_filename):
+            logger.info('Log file %s exists, skip this script' % log_filename)
+            return
+
+        if log_filename:
+            log_file = open(log_filename, 'w')
+        else:
+            log_file = None
+
+        # subprocess.call(script, env=os.environ) # Run with an updated system environment
+        timer = Timer()
+        with timer:
+            global popen_obj
+            popen_obj = subprocess.Popen(script_path, cwd = cwd, stdout = subprocess.PIPE)
+            # popen_obj = subprocess.Popen(script, cwd = cwd)
 
             # [stdoutdata, stderrdata] = popen_obj.communicate()
             while popen_obj.poll() is None:
@@ -109,10 +143,17 @@ class TaskRunner:
                     # log_file.write('A line break\n')
                 logger.info(l.strip())
 
-            report.write('Time: %.2f sec \n' % timer.GetElapsed())
-            report.write('Exit code: %d \n' % popen_obj.returncode)
+        if self.report:
+            self.report.write('Run script %s \n' % script)
+            self.report.write('Time: %.2f sec \n' % timer.GetElapsed())
+            self.report.write('Exit code: %d \n' % popen_obj.returncode)
 
 popen_obj = None
+
+def engine_check():
+    # config=UnrealEngine/Engine/Config/ConsoleVariables.ini
+    # if grep -Fq "r.ForceDebugViewModes = 1" ${config}; then
+    pass
 
 def signal_handler(signal, frame):
     print('You pressed Ctrl+C!')

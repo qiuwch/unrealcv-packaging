@@ -1,0 +1,28 @@
+{
+  "Tasks": [
+    {
+      "TaskName": "Linux_UE412_unrealcv",
+      "OS": "Mac",
+      "Report" : "{TaskName}.report",
+      "UE4":
+      {
+        "Path": "/home/qiuwch/workspace/UE412",
+        "Version": "4.12"
+      },
+      "UnrealCV":
+      {
+        "Path": "/home/qiuwch/workspace/unrealcv",
+        "Version": "0.3.9"
+      },
+      "Scripts":
+      [
+        {
+          "Path": [
+            "{UnrealCV}/build.sh"
+          ],
+          "CWD": "{UnrealCV}"
+        }
+      ]
+    }
+  ]
+}
