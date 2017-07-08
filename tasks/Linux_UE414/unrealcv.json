@@ -1,0 +1,28 @@
+{
+  "Tasks": [
+    {
+      "TaskName": "RR_Mac_UE414",
+      "OS": "Mac",
+      "Report" : "{TaskName}.report",
+      "UE4":
+      {
+        "Path": "/home/qiuwch/workspace/UE414",
+        "Version": "4.14"
+      },
+      "UnrealCV":
+      {
+        "Path": "/home/qiuwch/workspace/unrealcv",
+        "Version": "0.3.9"
+      },
+      "Scripts":
+      [
+        {
+          "Path": [
+            "{UnrealCV}/build.sh"
+          ],
+          "CWD": "{UnrealCV}"
+        }
+      ]
+    }
+  ]
+}

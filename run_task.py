@@ -126,6 +126,11 @@ class TaskRunner:
 
 popen_obj = None
 
+def engine_check():
+    # config=UnrealEngine/Engine/Config/ConsoleVariables.ini
+    # if grep -Fq "r.ForceDebugViewModes = 1" ${config}; then
+    pass
+
 def signal_handler(signal, frame):
     print('You pressed Ctrl+C!')
     if popen_obj:
