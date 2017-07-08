@@ -19,6 +19,8 @@ if __name__ == '__main__':
     system_name = platform.system()
     if system_name == 'Linux':
         UAT_Script = os.path.join(UE4, 'Engine/Build/BatchFiles/RunUAT.sh')
+        platform_name = 'Linux'
+
     elif system_name == 'Darwin':
         pass
     elif system_name == 'Win': # ??
@@ -30,7 +32,7 @@ if __name__ == '__main__':
         UAT_Script, 'BuildCookRun',
         '-project=%s' % abs_project_path,
         '-archivedirectory=%s' % abs_output_folder,
-        '-platform=%s' % platform,
+        '-platform=%s' % platform_name,
         '-clientconfig=Development',
         '-noP4', '-allmaps', '-stage', '-pak', '-archive', '-cook', '-build'
     ])

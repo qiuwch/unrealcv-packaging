@@ -26,7 +26,7 @@ class TaskRunner:
         self.opt = opt
         self.env = dict()
 
-    def setup_environ(self):
+    def _setup_environ(self): # private
         ''' Setup os environment variables based on the config '''
         logger.info('Setup os environment variables')
 
@@ -77,52 +77,74 @@ class TaskRunner:
         logger.info("Update opt with self.env")
         _update_opt(self.opt)
 
+    def _setup_check(self):
+        # Check whether the configuration is valid
+        # Check UE4
+
+        # Check UnrealCV
+
+        # Check uproject
+        if self.env.get('UProject'):
+            pass
 
     def run(self):
-        self.setup_environ()
+        self._setup_environ()
 
         report_filename = self.opt['Report']
-        report = open(report_filename, 'w')
+        self.report = open(report_filename, 'w')
 
         for script in self.opt['Scripts']:
-            # Pick 'task' instead of 'run', because 'run' can also be a verb.
-            logger.info('Script to run %s' % script)
-            logger.info('Script to run %s' % ' '.join(script['Path']))
-            script_path = script['Path']
-            # Format the script in a cross-platform way
+            self._run_script(script)
 
-            cwd = script.get('CWD') # optional
+        self.report.close()
 
-            log_filename = script.get('Log')
-            if log_filename and os.path.isfile(log_filename):
-                logger.info('Log file %s exists, skip this script' % log_filename)
-                continue
+    def _run_script(self, script):
+        ''' Run a defined script '''
+        # Pick 'task' instead of 'run', because 'run' can also be a verb.
+        logger.info('Script to run %s' % script)
+        logger.info('Script to run %s' % ' '.join(script['Path']))
 
-            if log_filename:
-                log_file = open(log_filename, 'w')
-            else:
-                log_file = None
+        # Required fields
+        script_path = script['Path']
+        # Optional fields
+        use_cache = script.get('Cache')
+        cwd = script.get('CWD') # optional
+        log_filename = script.get('Log')
 
-            # subprocess.call(script, env=os.environ) # Run with an updated system environment
-            timer = Timer()
-            report.write('Run script %s \n' % script)
-            with timer:
-                global popen_obj
-                popen_obj = subprocess.Popen(script_path, cwd = cwd, stdout = subprocess.PIPE)
-                # popen_obj = subprocess.Popen(script, cwd = cwd)
+        if use_cache is None: # Not defined
+            # By default this is true
+            use_cache = True
 
-                # [stdoutdata, stderrdata] = popen_obj.communicate()
-                while popen_obj.poll() is None:
-                    l = popen_obj.stdout.readline()
-                    # import ipdb; ipdb.set_trace()
-                    if log_file:
-                        line = l.replace(r"\r\n", r"\n") # Make it consistent
-                        log_file.write(line)
-                        # log_file.write('A line break\n')
-                    logger.info(l.strip())
+        if use_cache and log_filename and os.path.isfile(log_filename):
+            logger.info('Log file %s exists, skip this script' % log_filename)
+            return
 
-            report.write('Time: %.2f sec \n' % timer.GetElapsed())
-            report.write('Exit code: %d \n' % popen_obj.returncode)
+        if log_filename:
+            log_file = open(log_filename, 'w')
+        else:
+            log_file = None
+
+        # subprocess.call(script, env=os.environ) # Run with an updated system environment
+        timer = Timer()
+        with timer:
+            global popen_obj
+            popen_obj = subprocess.Popen(script_path, cwd = cwd, stdout = subprocess.PIPE)
+            # popen_obj = subprocess.Popen(script, cwd = cwd)
+
+            # [stdoutdata, stderrdata] = popen_obj.communicate()
+            while popen_obj.poll() is None:
+                l = popen_obj.stdout.readline()
+                # import ipdb; ipdb.set_trace()
+                if log_file:
+                    line = l.replace(r"\r\n", r"\n") # Make it consistent
+                    log_file.write(line)
+                    # log_file.write('A line break\n')
+                logger.info(l.strip())
+
+        if self.report:
+            self.report.write('Run script %s \n' % script)
+            self.report.write('Time: %.2f sec \n' % timer.GetElapsed())
+            self.report.write('Exit code: %d \n' % popen_obj.returncode)
 
 popen_obj = None
 
