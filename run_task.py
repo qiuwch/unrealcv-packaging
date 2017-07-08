@@ -111,15 +111,15 @@ class TaskRunner:
                 popen_obj = subprocess.Popen(script_path, cwd = cwd, stdout = subprocess.PIPE)
                 # popen_obj = subprocess.Popen(script, cwd = cwd)
 
-            # [stdoutdata, stderrdata] = popen_obj.communicate()
-            while popen_obj.poll() is None:
-                l = popen_obj.stdout.readline()
-                # import ipdb; ipdb.set_trace()
-                if log_file:
-                    line = l.replace(r"\r\n", r"\n") # Make it consistent
-                    log_file.write(line)
-                    # log_file.write('A line break\n')
-                logger.info(l.strip())
+                # [stdoutdata, stderrdata] = popen_obj.communicate()
+                while popen_obj.poll() is None:
+                    l = popen_obj.stdout.readline()
+                    # import ipdb; ipdb.set_trace()
+                    if log_file:
+                        line = l.replace(r"\r\n", r"\n") # Make it consistent
+                        log_file.write(line)
+                        # log_file.write('A line break\n')
+                    logger.info(l.strip())
 
             report.write('Time: %.2f sec \n' % timer.GetElapsed())
             report.write('Exit code: %d \n' % popen_obj.returncode)

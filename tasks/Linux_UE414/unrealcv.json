@@ -1,7 +1,7 @@
 {
   "Tasks": [
     {
-      "TaskName": "RR_Mac_UE414",
+      "TaskName": "Linux_UE414_unrealcv",
       "OS": "Mac",
       "Report" : "{TaskName}.report",
       "UE4":

@@ -6,6 +6,13 @@ This repository is used to support the testing of multiple versions of UE4 and U
 
 Packaging scripts for UnrealCV
 
+## Examples
+
+`python run_task.py tasks/Linux_UE414/unrealcv.json` to build unrealcv with vanilla UE4.
+
+`python run_task.py tasks/Docker/unrealcv.json`
+
+
 ## Scripts
 
 1. build-unrealcv - Build UnrealCV plugin binary
