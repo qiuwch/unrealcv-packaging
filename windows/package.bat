@@ -15,11 +15,13 @@ if not exist %project% (
 	goto:eof
 )
 
+REM "%UE4%"\Engine\Build\BatchFiles\Build.bat %project_name%Editor Win64 Development %project% -waitmutex
+
 set cmd="%UE4%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project=%project% -archivedirectory=%output_folder% -noP4 -platform=Win64 -clientconfig=Development -serverconfig=Development -allmaps -stage -pak -archive -cook -build
-if exist %project_folder%\Source (
-	rem Build source code
-    set cmd=%cmd% -build
-)
+REM if exist %project_folder%\Source (
+REM 	rem Build source code
+REM     set cmd=%cmd% -build
+REM )
 %cmd%
 
-call release.bat %build_name%
+REM call release.bat %build_name%

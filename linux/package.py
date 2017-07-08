@@ -20,13 +20,20 @@ if __name__ == '__main__':
     if system_name == 'Linux':
         UAT_Script = os.path.join(UE4, 'Engine/Build/BatchFiles/RunUAT.sh')
         platform_name = 'Linux'
-
     elif system_name == 'Darwin':
         pass
-    elif system_name == 'Win': # ??
-        pass
+    elif system_name == 'Windows': # ??
+        UAT_Script = os.path.join(UE4, 'Engine\\Build\\BatchFiles\\RunUAT.bat')
+        BuildScript = os.path.join(UE4, 'Engine\\Build\\BatchFiles\\Build.bat')
+        platform_name = 'Win64'
+        project_name = os.path.basename(args.uproject).replace('.uproject', '')
+
+        subprocess.call([
+            BuildScript, '%sEditor' % project_name,
+            'Win64', 'Development', args.uproject, '-waitmutex'
+        ])
     else:
-        print('The system %s can not be supported' % system)
+        print('The system %s can not be supported' % system_name)
 
     subprocess.call([
         UAT_Script, 'BuildCookRun',

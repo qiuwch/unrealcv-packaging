@@ -76,14 +76,33 @@ class TaskRunner:
 
         logger.info("Update opt with self.env")
         _update_opt(self.opt)
+        self._setup_check()
 
     def _setup_check(self):
+        def _verbose_assert(expect, value):
+            assert expect == value, 'Expect %s, but get %s' % (str(expect), str(value))
+
+        sys.path.append('./common')
+        import build_conf
         # Check whether the configuration is valid
         # Check UE4, check UE4 version
 
         # Check UnrealCV, check UnrealCV version
-        unrealcv_plugin = json.load(open(unrealcv_plugin_file))
-        unrealcv_version_name = unrealcv_plugin['VersionName']
+
+        env_data = dict(
+            OS = build_conf.parse_platform(),
+            UE4_version = build_conf.parse_ue4_version(),
+            UnrealCV_version = build_conf.parse_unrealcv_version()
+        )
+
+        # Check whether the task setting is the same as the running environment
+        if self.opt.get('UnrealCV'):
+            _verbose_assert(self.opt.get('UnrealCV').get('Version'), env_data.get('UnrealCV_version'))
+
+        if self.opt.get('UE4'):
+            _verbose_assert(self.opt.get('UE4').get('Version'), env_data.get('UE4_version'))
+            
+        _verbose_assert(self.opt.get('OS'), env_data.get('OS'))
 
         # Check uproject
         if self.env.get('UProject'):
