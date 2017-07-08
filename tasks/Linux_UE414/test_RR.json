@@ -1,12 +1,12 @@
 {
   "Tasks": [
     {
-      "TaskName": "RR_Mac_UE414",
-      "OS": "Mac",
+      "TaskName": "Linux_UE414_test_RR",
+      "OS": "Linux",
       "Report" : "{TaskName}.report",
       "UnrealCV":
       {
-        "Path": "/Users/qiuwch/workspace/unrealcv",
+        "Path": "/home/qiuwch/workspace/unrealcv",
         "Version": "0.3.9"
       },
       "Scripts":
@@ -16,7 +16,7 @@
             "python",
             "{PWD}/common/run_test.py",
             "--binary",
-            "UE414/RealisticRendering-Mac-0.3.9/MacNoEditor/RealisticRendering.app"
+            "UE414/RealisticRendering-Linux-0.3.9/LinuxNoEditor/RealisticRendering.app"
           ]
         }
       ]
