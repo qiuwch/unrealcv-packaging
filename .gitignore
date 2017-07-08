@@ -9,4 +9,8 @@
 
 .cache/
 unrealcv/
+
+# output folders
+UE412/
 UE414/
+UE416/
