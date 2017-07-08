@@ -6,6 +6,7 @@
 *.txt
 
 *~
+*.pyc
 
 .cache/
 unrealcv/
