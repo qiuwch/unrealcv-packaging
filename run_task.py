@@ -79,9 +79,11 @@ class TaskRunner:
 
     def _setup_check(self):
         # Check whether the configuration is valid
-        # Check UE4
+        # Check UE4, check UE4 version
 
-        # Check UnrealCV
+        # Check UnrealCV, check UnrealCV version
+        unrealcv_plugin = json.load(open(unrealcv_plugin_file))
+        unrealcv_version_name = unrealcv_plugin['VersionName']
 
         # Check uproject
         if self.env.get('UProject'):

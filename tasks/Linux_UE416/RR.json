@@ -1,0 +1,45 @@
+{
+  "Tasks": [
+    {
+      "TaskName": "Linux_UE416_RR",
+      "OS": "Linux",
+      "Report" : "{TaskName}.report",
+      "UE4":
+      {
+        "Path": "/home/qiuwch/workspace/UE416",
+        "Version": "4.16"
+      },
+      "UnrealCV":
+      {
+        "Path": "/home/qiuwch/workspace/unrealcv",
+        "Version": "0.3.9"
+      },
+      "UProject":
+      {
+        "Path": "uproject/UE4RealisticRendering/RealisticRendering.uproject"
+      },
+      "Scripts":
+      [
+        {
+          "Path": [
+            "python",
+            "common/install_unrealcv.py",
+            "--unrealcv", "{UnrealCV}",
+            "--uproject", "{UProject}"
+          ]
+        },
+        {
+          "Path": [
+            "python",
+            "{PWD}/linux/package.py",
+            "--uproject", "uproject/UE4RealisticRendering/RealisticRendering.uproject",
+            "--output_folder",
+            "{PWD}/UE416"
+          ],
+          "Log": "{TaskName}.log",
+          "Cache": false
+        }
+      ]
+    }
+  ]
+}
