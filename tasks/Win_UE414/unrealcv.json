@@ -1,0 +1,28 @@
+{
+  "Tasks": [
+    {
+      "TaskName": "Win_UE414_unrealcv",
+      "OS": "Windows",
+      "Report" : "{TaskName}.report",
+      "UE4":
+      {
+        "Path": "C:\\Program Files\\Epic Games\\UE_4.14",
+        "Version": "4.14"
+      },
+      "UnrealCV":
+      {
+        "Path": "C:\\qiuwch\\workspace\\unrealcv",
+        "Version": "0.3.9"
+      },
+      "Scripts":
+      [
+        {
+          "Path": [
+            "{UnrealCV}/build.bat"
+          ],
+          "CWD": "{UnrealCV}"
+        }
+      ]
+    }
+  ]
+}
