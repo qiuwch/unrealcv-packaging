@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "required": ["Runs"],
+  "required": ["Tasks"],
   "properties":
   {
     "Runs":
@@ -9,11 +9,11 @@
       "items":
       {
         "type": "object",
-        "title": "Run",
-        "required": ["OS", "UE4", "UnrealCV", "Project", "Name"],
+        "title": "Task",
+        "required": ["OS", "UE4", "UnrealCV", "TaskName", "Report", "Scripts"],
         "properties" :
         {
-          "Name":
+          "TaskName":
           {
             "type": "string"
           },
@@ -45,6 +45,16 @@
             "properties": {
               "Path": { "type": "string"},
               "Version": {"type": "string"}
+            }
+          },
+          "Scripts":
+          {
+            "type": "array",
+            "items":
+            {
+              "type": "object",
+              "title": "Script",
+              "required": ["Path"]
             }
           }
         }
