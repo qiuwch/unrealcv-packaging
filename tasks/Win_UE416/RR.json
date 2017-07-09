@@ -1,13 +1,13 @@
 {
   "Tasks": [
     {
-      "TaskName": "Win_UE414_RR",
+      "TaskName": "Win_UE416_RR",
       "OS": "Windows",
       "Report" : "{TaskName}.report",
       "UE4":
       {
-        "Path": "C:\\Program Files\\Epic Games\\UE_4.14",
-        "Version": "4.14"
+        "Path": "C:\\Program Files\\Epic Games\\UE_4.16",
+        "Version": "4.16"
       },
       "UnrealCV":
       {
@@ -24,7 +24,7 @@
           "Path": [
             "python",
             "common/install_unrealcv.py",
-            "--unrealcv", "UE414/unrealcv_{OS_Name}_{UnrealCV_Version}",
+            "--unrealcv", "UE416/unrealcv_{OS_Name}_{UnrealCV_Version}",
             "--uproject", "{UProject}"
           ]
         },
@@ -34,7 +34,7 @@
             "{PWD}/common/package.py",
             "--uproject", "uproject/UE4RealisticRendering/RealisticRendering.uproject",
             "--output_folder",
-            "{PWD}/UE414"
+            "{PWD}/UE416"
           ],
           "Log": "{TaskName}.log",
           "Cache": false

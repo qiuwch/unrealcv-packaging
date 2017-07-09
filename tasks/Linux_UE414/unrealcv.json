@@ -2,7 +2,7 @@
   "Tasks": [
     {
       "TaskName": "Linux_UE414_unrealcv",
-      "OS": "Mac",
+      "OS": "Linux",
       "Report" : "{TaskName}.report",
       "UE4":
       {
@@ -18,9 +18,9 @@
       [
         {
           "Path": [
-            "{UnrealCV}/build.sh"
-          ],
-          "CWD": "{UnrealCV}"
+            "python", "common/build_unrealcv.py",
+            "--output", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}"
+          ]
         }
       ]
     }

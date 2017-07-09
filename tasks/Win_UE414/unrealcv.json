@@ -18,9 +18,9 @@
       [
         {
           "Path": [
-            "{UnrealCV}/build.bat"
-          ],
-          "CWD": "{UnrealCV}"
+            "python", "common/build_unrealcv.py",
+            "--output", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}"
+          ]
         }
       ]
     }
