@@ -1,7 +1,7 @@
 {
   "Tasks": [
     {
-      "TaskName": "Win_UE414_unrealcv",
+      "TaskName": "Win_UE412_unrealcv",
       "OS": "Windows",
       "Report" : "{TaskName}.report",
       "UE4":
@@ -19,7 +19,7 @@
         {
           "Path": [
             "python", "common/build_unrealcv.py",
-            "--output", "UE412/unrealcv_{OS_Name}_{UnrealCV_Version}"
+            "--output", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}"
           ]
         }
       ]

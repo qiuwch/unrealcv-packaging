@@ -1,13 +1,13 @@
 {
   "Tasks": [
     {
-      "TaskName": "Win_UE414_test_RR",
+      "TaskName": "Win_UE416_test_RR",
       "OS": "Windows",
       "Report" : "{TaskName}.report",
       "UE4":
       {
-        "Path": "C:\\Program Files\\Epic Games\\UE_4.14",
-        "Version": "4.14"
+        "Path": "C:\\Program Files\\Epic Games\\UE_4.16",
+        "Version": "4.16"
       },
       "UnrealCV":
       {
