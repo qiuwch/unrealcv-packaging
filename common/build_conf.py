@@ -23,7 +23,7 @@ def parse_platform():
     else:
         return p
 
-if __name__ == '__main__':
+def get_info():
     unrealcv_version = parse_unrealcv_version()
     ue4_version = parse_ue4_version()
     info = dict(
@@ -31,6 +31,10 @@ if __name__ == '__main__':
         ue4_version = ue4_version,
         platform = parse_platform(),
     )
+    return info
+
+if __name__ == '__main__':
+    info = get_info()
     info_keys = ','.join(info.keys())
 
     parser = argparse.ArgumentParser()

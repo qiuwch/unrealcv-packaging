@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     project_folder = os.path.dirname(args.uproject)
 
-    unrealcv_binary_dir = os.path.join(args.unrealcv, 'Plugins/UnrealCV')
+    unrealcv_binary_dir = args.unrealcv
     target_dir = os.path.join(project_folder, 'Plugins/UnrealCV')
 
     if os.path.exists(target_dir): # Note: Use this with cautious

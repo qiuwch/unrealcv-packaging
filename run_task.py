@@ -27,6 +27,17 @@ class TaskRunner:
         self.env = dict()
 
     def _setup_environ(self): # private
+        def opt(*args):
+            path = 'opt' + ''.join(["['%s']" % v for v in args])
+            value = self.opt
+            for key in args:
+                if value:
+                    value = value.get(key)
+            if value is None:
+                print('Warning: value of %s can not be found' % path)
+                return None
+            return value
+
         ''' Setup os environment variables based on the config '''
         logger.info('Setup os environment variables')
 
@@ -34,27 +45,46 @@ class TaskRunner:
             TaskName = self.opt['TaskName'], # Required
         )
 
+        self.env = dict(
+            TaskName = opt('TaskName'), # Required
+            UE4 = opt('UE4', 'Path'),
+            UnrealCV = opt('UnrealCV', 'Path'),
+            UProject = opt('UProject', 'Path'),
+            UnrealCV_Version = opt('UnrealCV', 'Version'),
+            UE4_Version = opt('UE4', 'Version'),
+            OS_Name = opt('OS'),
+            HOME = os.environ['HOME'],
+            PWD = os.getcwd()
+        )
+
         # Optional args
         # Write in this way is more flexible than defining a function
-        if self.opt.get('UE4'):
-            mapping['UE4'] = self.opt['UE4']['Path'] # Required
+        # if self.opt.get('UE4'):
+        #     # mapping['UE4'] = self.opt['UE4']['Path'] # Required
+        #     mapping['UE4']
+        #
+        # if self.opt.get('UnrealCV'):
+        #     mapping['UnrealCV'] = self.opt['UnrealCV']['Path'] # Optinal
+        #
+        # if self.opt.get('UProject'):
+        #     mapping['UProject'] = self.opt['UProject']['Path'] # Optional
 
-        if self.opt.get('UnrealCV'):
-            mapping['UnrealCV'] = self.opt['UnrealCV']['Path'] # Optinal
+        # for (k,v) in mapping.iteritems():
+        #     # Windows can not distinguish upper-lower cases
+        #     # Windows can only use upper-case os environment variables
+        #     self.env[k] = v
 
-        if self.opt.get('UProject'):
-            mapping['UProject'] = self.opt['UProject']['Path'] # Optional
+        # Update os.environ
+        # for (k,v) in self.env.iteritems():
+        #     os.environ[k] = v
+        for k in ['UE4', 'UnrealCV']:
+            os.environ[k] = self.env[k]
 
 
+        # self.env['HOME'] = os.environ['HOME']
+        # self.env['PWD'] = os.getcwd() # For cross-platform support
 
-        for (k,v) in mapping.iteritems():
-            os.environ[k] = v
-            # Windows can not distinguish upper-lower cases
-            # Windows can only use upper-case os environment variables
-            self.env[k] = v
-
-        self.env['HOME'] = os.environ['HOME']
-        self.env['PWD'] = os.getcwd() # For cross-platform support
+        # Populate some special variables
 
         # Expand self.opt with self.env
         def _update_opt(node):
@@ -101,7 +131,7 @@ class TaskRunner:
 
         if self.opt.get('UE4'):
             _verbose_assert(self.opt.get('UE4').get('Version'), env_data.get('UE4_version'))
-            
+
         _verbose_assert(self.opt.get('OS'), env_data.get('OS'))
 
         # Check uproject
