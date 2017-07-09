@@ -24,7 +24,7 @@
           "Path": [
             "python",
             "common/install_unrealcv.py",
-            "--unrealcv", "{UnrealCV}",
+            "--unrealcv", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}",
             "--uproject", "{UProject}"
           ]
         },
@@ -34,7 +34,7 @@
             "{PWD}/common/package.py",
             "--uproject", "uproject/UE4RealisticRendering/RealisticRendering.uproject",
             "--output_folder",
-            "{PWD}/UE414"
+            "{UE4_Version}"
           ],
           "Log": "{TaskName}.log",
           "Cache": false
