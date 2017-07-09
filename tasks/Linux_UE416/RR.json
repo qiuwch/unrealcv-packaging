@@ -31,7 +31,7 @@
         {
           "Path": [
             "python",
-            "{PWD}/linux/package.py",
+            "{PWD}/common/package.py",
             "--uproject", "uproject/UE4RealisticRendering/RealisticRendering.uproject",
             "--output_folder",
             "{UE4_Version}"
