@@ -1,0 +1,6 @@
+Run script {u'Path': [u'python', u'common/install_unrealcv.py', u'--unrealcv', u'4.12/unrealcv_Linux_0.3.9', u'--uproject', u'uproject/UE4RealisticRendering/RealisticRendering.uproject']} 
+Time: 0.10 sec 
+Exit code: 0 
+Run script {u'Path': [u'python', u'/home/weichao/workspace/unrealcv-packaging/common/package.py', u'--uproject', u'uproject/UE4RealisticRendering/RealisticRendering.uproject', u'--output_folder', u'4.12'], u'Cache': False, u'Log': u'Linux_UE412_RR.log'} 
+Time: 919.73 sec 
+Exit code: 25 
