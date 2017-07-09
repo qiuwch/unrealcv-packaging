@@ -12,6 +12,6 @@
 unrealcv/
 
 # output folders
-UE412/
-UE414/
-UE416/
+4.12/
+4.14/
+4.16/
