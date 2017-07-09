@@ -4,6 +4,11 @@
       "TaskName": "Linux_UE414_test_RR",
       "OS": "Linux",
       "Report" : "{TaskName}.report",
+      "UE4":
+      {
+        "Path": "/home/qiuwch/workspace/UE414",
+        "Version": "4.14"
+      },
       "UnrealCV":
       {
         "Path": "/home/qiuwch/workspace/unrealcv",
@@ -16,8 +21,9 @@
             "python",
             "{PWD}/common/run_test.py",
             "--binary",
-            "UE414/RealisticRendering-Linux-0.3.9/LinuxNoEditor/RealisticRendering.app"
-          ]
+            "{UE4_Version}/RealisticRendering-Linux-{UnrealCV_Version}/LinuxNoEditor/RealisticRendering/Binaries/Linux/RealisticRendering"
+          ],
+          "Log": "{TaskName}.log"
         }
       ]
     }
