@@ -78,7 +78,8 @@ class TaskRunner:
         # for (k,v) in self.env.iteritems():
         #     os.environ[k] = v
         for k in ['UE4', 'UnrealCV']:
-            os.environ[k] = self.env[k]
+            if self.env.get(k):
+                os.environ[k] = self.env[k]
 
 
         # self.env['HOME'] = os.environ['HOME']
