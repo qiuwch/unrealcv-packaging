@@ -1,0 +1,61 @@
+{
+  "Tasks": [
+    {
+      "TaskName": "Win_UE412",
+      "OS": "Windows",
+      "Report" : "{TaskName}.report",
+      "UE4": {
+        "Path": "D:\\Program Files\\Epic Games\\UE_4.12", "Version": "4.12"
+      },
+      "UnrealCV": {
+        "Path": "C:\\qiuwch\\workspace\\unrealcv",
+        "Version": "0.3.9"
+      },
+      "Scripts": [{
+          "Path": [
+            "python", "common/build_unrealcv.py",
+            "--output", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}"
+          ],
+          "Log": "{TaskName}-build.log"
+      }]
+    },
+    {
+      "TaskName": "Win_UE414",
+      "OS": "Windows",
+      "Report" : "{TaskName}.report",
+      "UE4": {
+        "Path": "C:\\Program Files\\Epic Games\\UE_4.14", "Version": "4.14"
+      },
+      "UnrealCV": {
+        "Path": "C:\\qiuwch\\workspace\\unrealcv",
+        "Version": "0.3.9"
+      },
+      "Scripts": [{
+          "Path": [
+            "python", "common/build_unrealcv.py",
+            "--output", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}"
+          ],
+          "Log": "{TaskName}-build.log"
+      }]
+    },
+    {
+      "TaskName": "Win_UE416",
+      "OS": "Windows",
+      "Report" : "{TaskName}.report",
+      "UE4": {
+        "Path": "C:\\Program Files\\Epic Games\\UE_4.16", "Version": "4.16"
+      },
+      "UnrealCV": {
+        "Path": "C:\\qiuwch\\workspace\\unrealcv",
+        "Version": "0.3.9"
+      },
+      "Scripts": [{
+          "Path": [
+            "python", "common/build_unrealcv.py",
+            "--output", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}"
+          ],
+          "Log": "{TaskName}-build.log"
+      }]
+    },
+  ]
+}
