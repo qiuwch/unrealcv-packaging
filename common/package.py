@@ -44,7 +44,7 @@ if __name__ == '__main__':
     else:
         print('The system %s can not be supported' % system_name)
 
-    subprocess.call([
+    exit_code = subprocess.call([
         UAT_Script, 'BuildCookRun',
         '-project=%s' % abs_project_path,
         '-archivedirectory=%s' % abs_output_folder,
@@ -52,3 +52,4 @@ if __name__ == '__main__':
         '-clientconfig=Development',
         '-noP4', '-allmaps', '-stage', '-pak', '-archive', '-cook', '-build'
     ])
+    sys.exit(exit_code)

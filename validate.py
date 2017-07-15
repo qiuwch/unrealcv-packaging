@@ -2,7 +2,10 @@ import jsonschema, argparse, json
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--json', default='./tasks/Linux_UE414/unrealcv.json', help = 'The task file to validate')
+    parser.add_argument('--json',
+        # default='./tasks/Linux_UE414/unrealcv.json',
+        default='./tasks/Linux_UE414/zoo.json',
+        help = 'The task file to validate')
     parser.add_argument('--schema', default='./task.schema', help='The schema file to define a task')
 
     args = parser.parse_args()

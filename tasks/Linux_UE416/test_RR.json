@@ -1,13 +1,13 @@
 {
   "Tasks": [
     {
-      "TaskName": "Linux_UE414_test_RR",
+      "TaskName": "Linux_UE416_test_RR",
       "OS": "Linux",
       "Report" : "{TaskName}.report",
       "UE4":
       {
-        "Path": "/home/qiuwch/workspace/UE414",
-        "Version": "4.14"
+        "Path": "/home/qiuwch/workspace/UE416",
+        "Version": "4.16"
       },
       "UnrealCV":
       {
