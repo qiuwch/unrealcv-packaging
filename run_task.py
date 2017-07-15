@@ -22,9 +22,10 @@ class Timer:
         return self.elapse
 
 class TaskRunner:
-    def __init__(self, opt):
+    def __init__(self, opt, verbose):
         self.opt = opt
         self.env = dict()
+        self.verbose = verbose
 
     def _setup_environ(self): # private
         def opt(*args):
@@ -122,7 +123,7 @@ class TaskRunner:
 
         env_data = dict(
             OS = build_conf.parse_platform(),
-            UE4_version = build_conf.parse_ue4_version(),
+            UE4_version = build_conf.parse_ue4_version(str(os.environ.get('UE4'))),
             UnrealCV_version = build_conf.parse_unrealcv_version()
         )
 
@@ -143,7 +144,7 @@ class TaskRunner:
         self._setup_environ()
 
         report_filename = self.opt['Report']
-        self.report = open(report_filename, 'w')
+        self.report = open(report_filename, 'w+')
 
         for script in self.opt['Scripts']:
             self._run_script(script)
@@ -191,7 +192,8 @@ class TaskRunner:
                     line = l.replace(r"\r\n", r"\n") # Make it consistent
                     log_file.write(line)
                     # log_file.write('A line break\n')
-                logger.info(l.strip())
+                if self.verbose:
+                    logger.info(l.strip())
 
         if self.report:
             self.report.write('Run script %s \n' % script)
@@ -214,14 +216,25 @@ signal.signal(signal.SIGINT, signal_handler)
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('config', help='Config file to run the test', default='template.json')
+    parser.add_argument('task_file', help='Config file to run the test', default='template.json')
+    parser.add_argument('--verbose', action='store_true', default=False, help='Whether to run in the verbose model and print the output of each script')
 
     args = parser.parse_args()
 
-    config = json.load(open(args.config))
+    task_file = args.task_file
+    is_verbose = args.verbose
+
+    print("Load task definition from %s" % task_file)
+    if not os.path.isfile(task_file):
+        print('File %s not exist')
+        return
+
+    config = json.load(open(task_file))
     # print(config)
-    runner = TaskRunner(config['Tasks'][0])
-    runner.run()
+    for task in config['Tasks']:
+        print('-' * 80)
+        runner = TaskRunner(task, verbose = is_verbose)
+        runner.run()
 
 
 if __name__ == '__main__':

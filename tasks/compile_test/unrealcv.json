@@ -1,7 +1,7 @@
 {
   "Tasks": [
     {
-      "TaskName": "Win_UE412",
+      "TaskName": "Build_UnrealCV_with_diff_UE4",
       "OS": "Windows",
       "Report" : "{TaskName}.report",
       "UE4": {
@@ -20,7 +20,7 @@
       }]
     },
     {
-      "TaskName": "Win_UE414",
+      "TaskName": "Build_UnrealCV_with_diff_UE4",
       "OS": "Windows",
       "Report" : "{TaskName}.report",
       "UE4": {
@@ -39,7 +39,7 @@
       }]
     },
     {
-      "TaskName": "Win_UE416",
+      "TaskName": "Build_UnrealCV_with_diff_UE4",
       "OS": "Windows",
       "Report" : "{TaskName}.report",
       "UE4": {
@@ -56,6 +56,6 @@
           ],
           "Log": "{TaskName}-build.log"
       }]
-    },
+    }
   ]
 }

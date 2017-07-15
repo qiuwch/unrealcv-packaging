@@ -7,6 +7,7 @@ def parse_unrealcv_version(unrealcv_folder=str(os.environ.get('UnrealCV'))):
     return plugin_version
 
 def parse_ue4_version(ue4_folder=str(os.environ.get('UE4'))):
+    ''' Notice: The default parameter will be fixed to when the module is first loaded '''
     version_file = os.path.join(ue4_folder, 'Engine/Build/Build.version')
     if not os.path.isfile(version_file):
         return None

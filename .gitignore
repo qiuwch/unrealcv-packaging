@@ -1,17 +1,8 @@
-*.swp
-*.png
-
-*.log
-*.report
-*.txt
-
-*~
-*.pyc
-
-.cache/
-unrealcv/
-
-# output folders
+*
+!*/
 4.12/
 4.14/
 4.16/
+
+!*.py
+!*.json
