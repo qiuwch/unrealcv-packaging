@@ -1,0 +1,64 @@
+{
+  "type": "object",
+  "required": ["Tasks"],
+  "properties":
+  {
+    "Runs":
+    {
+      "type": "array",
+      "items":
+      {
+        "type": "object",
+        "title": "Task",
+        "required": ["OS", "UE4", "UnrealCV", "TaskName", "Report", "Scripts"],
+        "properties" :
+        {
+          "TaskName":
+          {
+            "type": "string"
+          },
+          "UE4":
+          {
+            "type": "object",
+            "title": "UE4",
+            "required": ["Path", "Version"],
+            "properties": {
+              "Path": { "type": "string"},
+              "Version": {"type": "string"}
+            }
+          },
+          "UnrealCV":
+          {
+            "type": "object",
+            "title": "UnrealCV",
+            "required": ["Path", "Version"],
+            "properties": {
+              "Path": { "type": "string"},
+              "Version": {"type": "string"}
+            }
+          },
+          "Project":
+          {
+            "type": "object",
+            "title": "Project",
+            "required": ["Path", "Output"],
+            "properties": {
+              "Path": { "type": "string"},
+              "Version": {"type": "string"}
+            }
+          },
+          "Scripts":
+          {
+            "type": "array",
+            "items":
+            {
+              "type": "object",
+              "title": "Script",
+              "required": ["Path"]
+            }
+          }
+        }
+      }
+    }
+  }
+}

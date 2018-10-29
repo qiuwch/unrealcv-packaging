@@ -1,0 +1,64 @@
+{
+  "Tasks": [
+    {
+      "TaskName": "Playground_Win_Build_UE412",
+      "OS": "Windows",
+      "Report" : "{TaskName}.report",
+      "UE4":
+      {
+        "Path": "D:\\Program Files\\Epic Games\\UE_4.12",
+        "Version": "4.12"
+      },
+      "UnrealCV":
+      {
+        "Path": "C:\\qiuwch\\workspace\\unrealcv",
+        "Version": "0.3.9"
+      },
+      "Scripts":
+      [
+        {
+          "Path":
+          [
+              "rm",
+              "-rf",
+              "C:\\qiuwch\\workspace\\playground2\\Intermediate"
+          ]
+        },
+        {
+          "Path":
+          [
+              "{UE4}\\Engine\\Build\\BatchFiles\\Build.bat",
+              "PlaygroundEditor",
+              "Win64",
+              "Development",
+              "C:\\qiuwch\\workspace\\playground2\\playground.uproject",
+              "-waitmutex"
+          ],
+          "Log": "{TaskName}-Build.log"
+        },
+        {
+          "Path": [
+            "{PWD}/windows/install-plugin.bat", "uproject/UE4RealisticRendering/RealisticRendering.uproject",
+            "{UnrealCV}/Plugins"
+          ]
+        },
+        {
+          "Path": [
+            "{PWD}/windows/package.bat", "C:\\qiuwch\\workspace\\playground2\\playground.uproject",
+            "{PWD}/UE412"
+          ],
+          "Log": "{TaskName}-Package.log"
+        },
+        {
+          "Path": [
+            "python",
+            "{PWD}/test/run_test.py",
+            "--binary", "UE414/RealisticRendering-Windows-0.3.9/WindowsNoEditor/RealisticRendering.exe"
+          ],
+          "Skip": true,
+          "Log": "{TaskName}-RR-Test.log"
+        }
+      ]
+    }
+  ]
+}

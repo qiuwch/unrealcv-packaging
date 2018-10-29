@@ -1,0 +1,50 @@
+{
+  "__help": "1. Clone the UE4 first",
+  "Tasks": [
+    {
+      "TaskName": "UE414_Windows_Build",
+      "OS": "Windows",
+      "Report" : "{TaskName}.report",
+      "UE4":
+      {
+        "Path": "C:\\Program Files\\Epic Games\\UE_4.14",
+        "Version": "4.14"
+      },
+      "UnrealCV":
+      {
+        "Path": "C:\\qiuwch\\workspace\\unrealcv",
+        "Version": "0.3.9"
+      },
+      "Scripts":
+      [
+        {
+          "Path":
+          [
+            "python", "{PWD}/common/build-conf.py"
+          ]
+        },
+        {
+          "Path": [
+            "{PWD}/windows/install-plugin.bat", "uproject/UE4RealisticRendering/RealisticRendering.uproject",
+            "{UnrealCV}/Plugins"
+          ]
+        },
+        {
+          "Path": [
+            "{PWD}/windows/package.bat", "uproject/UE4RealisticRendering/RealisticRendering.uproject",
+            "{PWD}/UE414"
+          ],
+          "Log": "{TaskName}-RR-Package.log"
+        },
+        {
+          "Path": [
+            "python",
+            "{PWD}/test/run_test.py",
+            "--binary", "UE414/RealisticRendering-Windows-0.3.9/WindowsNoEditor/RealisticRendering.exe"
+          ],
+          "Log": "{TaskName}-RR-Test.log"
+        }
+      ]
+    }
+  ]
+}

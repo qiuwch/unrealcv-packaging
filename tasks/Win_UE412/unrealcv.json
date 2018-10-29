@@ -1,0 +1,28 @@
+{
+  "Tasks": [
+    {
+      "TaskName": "Win_UE412_unrealcv",
+      "OS": "Windows",
+      "Report" : "{TaskName}.report",
+      "UE4":
+      {
+        "Path": "D:\\Program Files\\Epic Games\\UE_4.12",
+        "Version": "4.12"
+      },
+      "UnrealCV":
+      {
+        "Path": "C:\\qiuwch\\workspace\\unrealcv",
+        "Version": "0.3.9"
+      },
+      "Scripts":
+      [
+        {
+          "Path": [
+            "python", "common/build_unrealcv.py",
+            "--output", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}"
+          ]
+        }
+      ]
+    }
+  ]
+}

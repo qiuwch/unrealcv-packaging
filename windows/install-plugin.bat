@@ -1,6 +1,6 @@
-set plugin_binary=unrealcv\Plugins
 set project=%1%
-set project_folder=%~dp1%
+set plugin_binary=%2%
+set project_folder=%~dp1
 if "%project%"=="" (
     rem Project file can not be empty
     goto blank
@@ -13,4 +13,4 @@ if not exist %plugin_binary% (
     call build-plugin.bat
 )
 
-xcopy /e %plugin_binary% %project_folder%\Plugins
+xcopy /e /y /q %plugin_binary% %project_folder%\Plugins\

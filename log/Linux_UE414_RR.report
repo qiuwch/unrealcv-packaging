@@ -1,0 +1,30 @@
+Run script {u'Path': [u'python', u'common/install_unrealcv.py', u'--unrealcv', u'4.14/unrealcv_Linux_0.3.9', u'--uproject', u'uproject/UE414Minimal/UE414Minimal.uproject']} 
+Time: 0.03 sec 
+Exit code: 1 
+Run script {u'Path': [u'python', u'/home/weichao/workspace/unrealcv-packaging/common/package.py', u'--uproject', u'uproject/UE414Minimal/UE414Minimal.uproject', u'--output_folder', u'4.14'], u'Cache': False, u'Log': u'Linux_UE414_RR_mini.log'} 
+Time: 3052.91 sec 
+Exit code: 1 
+Run script {u'Path': [u'python', u'common/install_unrealcv.py', u'--unrealcv', u'4.14/unrealcv_Linux_0.3.9', u'--uproject', u'uproject/UE4UrbanCity/UrbanCity.uproject']} 
+Time: 0.04 sec 
+Exit code: 1 
+Run script {u'Path': [u'python', u'/home/weichao/workspace/unrealcv-packaging/common/package.py', u'--uproject', u'uproject/UE4UrbanCity/UrbanCity.uproject', u'--output_folder', u'4.14'], u'Cache': False, u'Log': u'Linux_UE414_RR_city.log'} 
+Time: 25.99 sec 
+Exit code: 1 
+Run script {u'Path': [u'python', u'common/install_unrealcv.py', u'--unrealcv', u'4.14/unrealcv_Linux_0.3.9', u'--uproject', u'uproject/UE4ArchinteriorsVol2Scene1/ArchinteriorsVol2Scene1.uproject']} 
+Time: 0.04 sec 
+Exit code: 1 
+Run script {u'Path': [u'python', u'/home/weichao/workspace/unrealcv-packaging/common/package.py', u'--uproject', u'uproject/UE4ArchinteriorsVol2Scene2/ArchinteriorsVol2Scene2.uproject', u'--output_folder', u'4.14'], u'Cache': False, u'Log': u'Linux_UE414_RR_Arch1.log'} 
+Time: 12.70 sec 
+Exit code: 1 
+Run script {u'Path': [u'python', u'common/install_unrealcv.py', u'--unrealcv', u'4.14/unrealcv_Linux_0.3.9', u'--uproject', u'uproject/UE4ArchinteriorsVol2Scene2/ArchinteriorsVol2Scene2.uproject']} 
+Time: 0.04 sec 
+Exit code: 1 
+Run script {u'Path': [u'python', u'/home/weichao/workspace/unrealcv-packaging/common/package.py', u'--uproject', u'uproject/UE4ArchinteriorsVol2Scene3/ArchinteriorsVol2Scene3.uproject', u'--output_folder', u'4.14'], u'Cache': False, u'Log': u'Linux_UE414_RR_Arch2.log'} 
+Time: 13.74 sec 
+Exit code: 1 
+Run script {u'Path': [u'python', u'common/install_unrealcv.py', u'--unrealcv', u'4.14/unrealcv_Linux_0.3.9', u'--uproject', u'uproject/UE4ArchinteriorsVol2Scene3/ArchinteriorsVol2Scene3.uproject']} 
+Time: 0.04 sec 
+Exit code: 1 
+Run script {u'Path': [u'python', u'/home/weichao/workspace/unrealcv-packaging/common/package.py', u'--uproject', u'uproject/UE4ArchinteriorsVol2Scene3/ArchinteriorsVol2Scene3.uproject', u'--output_folder', u'4.14'], u'Cache': False, u'Log': u'Linux_UE414_RR_Arch3.log'} 
+Time: 13.39 sec 
+Exit code: 1 

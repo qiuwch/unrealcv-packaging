@@ -1,0 +1,127 @@
+{
+  "Tasks": [
+    {
+      "TaskName": "Linux_UE414_RR",
+      "OS": "Linux",
+      "Report" : "{TaskName}.report",
+      "UE4":
+      {
+        "Path": "/home/qiuwch/workspace/UE414",
+        "Version": "4.14"
+      },
+      "UnrealCV":
+      {
+        "Path": "/home/qiuwch/workspace/unrealcv",
+        "Version": "0.3.9"
+      },
+      "Scripts":
+      [
+        {
+          "Path": [
+            "python",
+            "common/install_unrealcv.py",
+            "--unrealcv", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}",
+            "--uproject",
+            "uproject/UE414Minimal/UE414Minimal.uproject"
+          ]
+        },
+        {
+          "Path": [
+            "python",
+            "{PWD}/common/package.py",
+            "--uproject",
+            "uproject/UE414Minimal/UE414Minimal.uproject",
+            "--output_folder",
+            "{UE4_Version}"
+          ],
+          "Log": "{TaskName}_mini.log",
+          "Cache": false
+        },
+        {
+          "Path": [
+            "python",
+            "common/install_unrealcv.py",
+            "--unrealcv", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}",
+            "--uproject",
+            "uproject/UE4UrbanCity/UrbanCity.uproject"
+          ]
+        },
+        {
+          "Path": [
+            "python",
+            "{PWD}/common/package.py",
+            "--uproject",
+            "uproject/UE4UrbanCity/UrbanCity.uproject",
+            "--output_folder",
+            "{UE4_Version}"
+          ],
+          "Log": "{TaskName}_city.log",
+          "Cache": false
+        },
+        {
+          "Path": [
+            "python",
+            "common/install_unrealcv.py",
+            "--unrealcv", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}",
+            "--uproject",
+            "uproject/UE4ArchinteriorsVol2Scene1/ArchinteriorsVol2Scene1.uproject"
+          ]
+        },
+        {
+          "Path": [
+            "python",
+            "{PWD}/common/package.py",
+            "--uproject",
+            "uproject/UE4ArchinteriorsVol2Scene2/ArchinteriorsVol2Scene2.uproject",
+            "--output_folder",
+            "{UE4_Version}"
+          ],
+          "Log": "{TaskName}_Arch1.log",
+          "Cache": false
+        },
+        {
+          "Path": [
+            "python",
+            "common/install_unrealcv.py",
+            "--unrealcv", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}",
+            "--uproject",
+            "uproject/UE4ArchinteriorsVol2Scene2/ArchinteriorsVol2Scene2.uproject"
+          ]
+        },
+        {
+          "Path": [
+            "python",
+            "{PWD}/common/package.py",
+            "--uproject",
+            "uproject/UE4ArchinteriorsVol2Scene3/ArchinteriorsVol2Scene3.uproject",
+            "--output_folder",
+            "{UE4_Version}"
+          ],
+          "Log": "{TaskName}_Arch2.log",
+          "Cache": false
+        },
+        {
+          "Path": [
+            "python",
+            "common/install_unrealcv.py",
+            "--unrealcv", "{UE4_Version}/unrealcv_{OS_Name}_{UnrealCV_Version}",
+            "--uproject",
+            "uproject/UE4ArchinteriorsVol2Scene3/ArchinteriorsVol2Scene3.uproject"
+          ]
+        },
+        {
+          "Path": [
+            "python",
+            "{PWD}/common/package.py",
+            "--uproject",
+            "uproject/UE4ArchinteriorsVol2Scene3/ArchinteriorsVol2Scene3.uproject",
+            "--output_folder",
+            "{UE4_Version}"
+          ],
+          "Log": "{TaskName}_Arch3.log",
+          "Cache": false
+        }
+      ]
+    }
+  ]
+}

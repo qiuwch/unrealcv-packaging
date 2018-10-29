@@ -1,0 +1,31 @@
+{
+  "Tasks": [
+    {
+      "TaskName": "Linux_UE416_test_RR",
+      "OS": "Linux",
+      "Report" : "{TaskName}.report",
+      "UE4":
+      {
+        "Path": "/home/qiuwch/workspace/UE416",
+        "Version": "4.16"
+      },
+      "UnrealCV":
+      {
+        "Path": "/home/qiuwch/workspace/unrealcv",
+        "Version": "0.3.9"
+      },
+      "Scripts":
+      [
+        {
+          "Path": [
+            "python",
+            "{PWD}/common/run_test.py",
+            "--binary",
+            "{UE4_Version}/RealisticRendering-Linux-{UnrealCV_Version}/LinuxNoEditor/RealisticRendering/Binaries/Linux/RealisticRendering"
+          ],
+          "Log": "{TaskName}.log"
+        }
+      ]
+    }
+  ]
+}
